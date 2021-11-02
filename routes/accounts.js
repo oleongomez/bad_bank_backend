@@ -13,8 +13,8 @@ router.post("/add", function (req, res, next){
     var body =  req.body
     console.log('Creating an account with: ', body)
     var mongo_adapter = new MongoStorageAdapter(url)
-    var {name, email, password} = {...req.body}
-    var acc = new Account(name, email, password, mongo_adapter)
+    var {unique_id, name, email} = {...req.body}
+    var acc = new Account(unique_id, name, email, mongo_adapter)
     acc.saveToStorage().then((value)=>{
         console.log("Saved then: "+ value)
         res.send(value)
@@ -22,10 +22,27 @@ router.post("/add", function (req, res, next){
     
 })
 
-router.get("/data", function (req, res, next){
+router.post("/data", function (req, res, next){
     var body = req.body
     console.log("Looking for :", body)
-    res.send('NOT IMPLEMENTED')
+    var {unique_id, email} = {...req.body}
+    var mongo_adapter = new MongoStorageAdapter(url)
+    var acc = new Account(unique_id, '', email, mongo_adapter)
+    acc.loadFromStorage().then((value)=>{
+        console.log("Loaded Account: ",value)
+        res.send(value)
+    })
+})
+
+router.post("/update_balance", function (req, res, next){
+    let {unique_id, email, amount} = {...req.body}
+    console.log(unique_id, email, amount)
+    var mongo_adapter = new MongoStorageAdapter(url)
+    var acc = new Account(unique_id, null, email, mongo_adapter)
+    let result = acc.updateBalance(amount).then((value)=>{
+        console.log("Updated account:",value)
+        res.send(value)
+    })
 })
 
 router.get("/all_data", function (req, res, next){
