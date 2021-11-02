@@ -7,7 +7,7 @@ const Account = require("../src/domain/account")
 var adapters = require("../src/adapters/mongo_adapter")
 var MongoStorageAdapter = adapters.MongoStorageAdapter
 
-const url = 'mongo://localhost:27017'
+const url = 'mongodb://localhost:27017'
 
 router.post("/add", function (req, res, next){
     var body =  req.body
