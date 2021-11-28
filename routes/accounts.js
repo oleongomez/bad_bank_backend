@@ -7,7 +7,7 @@ const Account = require("../src/domain/account")
 var adapters = require("../src/adapters/mongo_adapter")
 var MongoStorageAdapter = adapters.MongoStorageAdapter
 
-const url = 'mongodb://accounts:bXkIFbmGRxF4hjixK7A@54.151.63.111:27017/?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=accounts&authMechanism=SCRAM-SHA-256&3t.uriVersion=3&3t.connection.name=54.151.63.111&3t.alwaysShowAuthDB=true&3t.alwaysShowDBFromUserRole=true'
+const url = 'mongodb://accounts:bXkIFbmGRxF4hjixK7A@54.151.63.111:27017/?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=accounts&authMechanism=SCRAM-SHA-256'
 router.post("/add", function (req, res, next){
     var body =  req.body
     console.log('Creating an account with: ', body)
